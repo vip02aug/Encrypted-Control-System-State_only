@@ -40,7 +40,7 @@ $$
 u_k = r - Kx_k
 $$
 
-Since $y_k = x_k$, the same control law may also be interpreted as output feedback in this special case.
+Since $y_k = x_k$, this corresponds to a full-state feedback controller where all system states are directly measurable.
 
 where:
 - $x_k$ is the state vector
@@ -56,10 +56,10 @@ In this version of the project, only the **state vector** is encrypted. The gain
 
 This version focuses on encrypting only the state because:
 
-- it is simpler to implement and explain
-- it avoids expensive homomorphic multiplication between encrypted state and encrypted gain
-- it provides a clean first step toward privacy-preserving control
-- it forms the foundation for a future full-encryption extension
+- It is simpler to implement and explain
+- It avoids expensive homomorphic multiplication between the encrypted state and the encrypted gain
+- It provides a clean first step toward privacy-preserving control
+- It forms the foundation for a future full-encryption extension
 
 ---
 
@@ -78,7 +78,7 @@ where:
 - $e[k]$: small noise vector
 - $q$: large prime modulus
 
-The recovered state is then used to compute the control action with plaintext gain \(K\).
+The recovered (approximate) state is then used to compute the control input using the plaintext gain $K$.
 
 ---
 
@@ -89,10 +89,20 @@ The recovered state is then used to compute the control action with plaintext ga
 - recursive state encryption
 - modular arithmetic with large prime modulus
 - approximate state recovery
-- comparison between plaintext and recovered/encrypted-domain behavior
+- comparison between plaintext and recovered/encrypted-domain behaviour
 
 ---
+## Workflow
 
+1. Initialize system matrices $A, B, K$
+2. Simulate the plaintext system
+3. Quantise and encrypt the state
+4. Update encrypted state recursively
+5. Recover approximate state
+6. Compute control input
+7. Compare plaintext and recovered trajectories
+
+---
 ## Repository Structure
 
 ```text
