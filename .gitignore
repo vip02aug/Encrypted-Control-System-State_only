@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.asv
+slprj/
+*.log
+.vscode/
+.DS_Store
